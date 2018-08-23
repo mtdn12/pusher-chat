@@ -1,26 +1,12 @@
-ul {
-  list-style-type: none;
-}
-.chat {
-  margin-top: 50px;
-}
-.chatMessage {
-  position: relative;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin: 20px auto;
-  width: 700px;
-  display: table;
-}
-.box {
-  background-color: #ffffff;
+.ChatList {
+  min-height: 500px;
+  max-height: 600px;
+  background: #524949;
+  margin-bottom: 20px;
+  color: #fff;
   padding: 20px;
-  border-bottom: 1px solid #cccccc;
 }
-.imageHolder {
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 20px;
-  right: 50px;
+.userName {
+  font-weight: bold;
+  margin-right: 5px;
 }

@@ -3,8 +3,8 @@ import axios from "axios";
 import Pusher from "pusher-js";
 import ChatList from "./ChatList";
 import ChatBox from "./ChatBox";
-import logo from "./logo.svg";
 import "./App.css";
+import { Typography } from "@material-ui/core";
 
 class App extends Component {
   state = {
@@ -12,46 +12,47 @@ class App extends Component {
     username: "",
     chats: []
   };
-  componentDidMount =  async() =>{
+  componentDidMount = async () => {
     const username = window.prompt("Username: ", "Anonymous");
     await this.setState({ username });
     const pusher = new Pusher("6adc10843981b62e1553", {
       cluster: "ap1",
       encrypted: true
     });
-    const chanel = pusher.subscribe(`chat`)
-    console.log(chanel)
+    const chanel = pusher.subscribe(`chat`);
+    console.log(chanel);
     chanel.bind(`message-${this.state.username}`, data => {
-      console.log('hi bind a message')
+      console.log("hi bind a message");
       this.setState({ chats: [...this.state.chats, data], text: "" });
     });
   };
-  handleTextChange =  e  => {
+  handleTextChange = e => {
     this.setState({ text: e.target.value });
   };
-  handleEnterChat  = e => {
-    if (e.keyCode === 13) {
-      const payload = {
-        username: this.state.username,
-        message: this.state.text
-      };
-      axios.post("/api/message", payload);
-    }
+  handleSendMessage = () => {
+    const payload = {
+      username: this.state.username,
+      message: this.state.text
+    };
+    axios.post("/api/message", payload);
   };
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React-Pusher Chat</h1>
-        </header>
-        <section>
+        <section className="container">
+          <Typography
+            align="center"
+            variant="title"
+            color="primary"
+            gutterBottom
+          >
+            Welcome {this.state.username}
+          </Typography>
           <ChatList chats={this.state.chats} />
           <ChatBox
             text={this.state.text}
-            username={this.state.username}
             handleTextChange={this.handleTextChange}
-            handleEnterChat={this.handleEnterChat}
+            handleSendMessage={this.handleSendMessage}
           />
         </section>
       </div>

@@ -1,27 +1,27 @@
 import React from "react";
 import "./ChatBox.css";
+import { TextField, Button, Grid } from "@material-ui/core";
 
-const ChatBox = ({ text, username, handleTextChange, handleEnterChat }) => (
-  <div>
-    <div className="row">
-      <div className="col-xs-12">
-        <div className="chat">
-          <div className="col-xs-5 col-xs-offset-3">
-            <input
-              type="text"
-              value={text}
-              placeholder="chat here..."
-              className="form-control"
-              onChange={handleTextChange}
-              onKeyDown={handleEnterChat}
-            />
-          </div>
-          <div className="clearfix" />
-        </div>
-      </div>
-      <h4 className="greetings">Hello, {username}</h4>
-    </div>
-  </div>
+const ChatBox = ({ text, handleTextChange, handleSendMessage }) => (
+  <Grid container justify="space-between">
+    <Grid item xs={10}>
+      <TextField
+        onChange={handleTextChange}
+        placeholder="Chat here..."
+        value={text}
+        fullWidth
+        multiline
+        InputProps={{
+          disableUnderline: true
+        }}
+      />
+    </Grid>
+    <Grid item xs={2}>
+      <Button variant="raised" color="primary" onClick={handleSendMessage}>
+        Send
+      </Button>
+    </Grid>
+  </Grid>
 );
 
-export default ChatBox
+export default ChatBox;
