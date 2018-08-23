@@ -19,23 +19,9 @@ var pusher = new Pusher({
 
 app.post('/api/message', (req, res) => {
   const payload = req.body
-  pusher.trigger('chat','message', payload)
+  pusher.trigger(`chat`,`message-${payload.username}`, payload)
   res.send(payload)
 })
-// app.get('/test', (req, res) => {
-//   pusher.trigger('chat','message', {
-//     username: 'Tuan',
-//     message: 'Test trigger'
-//   })
-//   res.send('triggered')
-// })
-// let timmer = setInterval(()=>{
-//   console.log('trigger')
-//   pusher.trigger('chat','message', {
-//     username: 'Tuan',
-//     message: 'Test trigger'
-//   })
-// },10000)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 

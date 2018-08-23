@@ -1,6 +1,5 @@
 import React from "react";
 import "./ChatList.css";
-import avatar from "./avatar.jpg";
 
 const ChatList = ({ chats }) => (
   <ul>
@@ -15,14 +14,7 @@ const ChatList = ({ chats }) => (
                     <strong>{chat.username}</strong>
                   </p>
                   <p>{chat.message}</p>
-                </div>
-                <div className="imageHolder">
-                  <img
-                    src={avatar}
-                    className="img-responsive avatar"
-                    alt="logo"
-                  />
-                </div>
+                </div>                
               </div>
             </div>
           </div>

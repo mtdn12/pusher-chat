@@ -9,18 +9,19 @@ import "./App.css";
 class App extends Component {
   state = {
     text: "",
-    username: "Tuan",
+    username: "",
     chats: []
   };
-  componentDidMount (){
-    // const username = window.prompt("Username: ", "Anonymous");
-    // this.setState({ username });
+  componentDidMount =  async() =>{
+    const username = window.prompt("Username: ", "Anonymous");
+    await this.setState({ username });
     const pusher = new Pusher("6adc10843981b62e1553", {
       cluster: "ap1",
       encrypted: true
     });
-    const chanel = pusher.subscribe("chat")
-    chanel.bind("message", data => {
+    const chanel = pusher.subscribe(`chat`)
+    console.log(chanel)
+    chanel.bind(`message-${this.state.username}`, data => {
       console.log('hi bind a message')
       this.setState({ chats: [...this.state.chats, data], text: "" });
     });
